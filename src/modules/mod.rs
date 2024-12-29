@@ -1,3 +1,4 @@
+pub mod content;
 pub mod styled;
 
 use crate::utils::strings;

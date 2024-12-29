@@ -5,6 +5,7 @@ use std::fmt;
 #[allow(dead_code)]
 #[derive(Clone, Copy)]
 pub enum Icon {
+    Empty,
     Manual(&'static str),
     Time,
     Hyprland,
@@ -37,6 +38,7 @@ impl Icon {
 impl fmt::Display for Icon {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
+            Icon::Empty => write!(f, "{}", ""),
             Icon::Manual(s) => write!(f, "{}", s),
             Icon::Time => write!(f, ""),
             Icon::Hyprland => write!(f, ""),

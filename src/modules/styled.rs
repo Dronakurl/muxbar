@@ -1,41 +1,37 @@
+use core::fmt;
+use std::fmt::Formatter;
+
 use crate::colors;
-use crate::icons;
-use crate::modules::Module;
+use crate::colors::Style;
+use crate::icons::Icon;
+use crate::modules::content::Content;
 
 #[derive(Clone, Copy)]
-pub struct StyledModule {
-    module: Module,
-    icon: Option<icons::Icon>,
-    style: colors::Style,
+pub struct StyledModule<T> {
+    content: T,
+    icon: Option<Icon>,
+    style: Style,
 }
 
-impl StyledModule {
-    pub fn new(module: Module, icon: Option<icons::Icon>, style: colors::Style) -> Self {
+impl<T> StyledModule<T> {
+    pub fn new(content: T, icon: Option<Icon>, style: colors::Style) -> Self {
         Self {
-            module,
+            content,
             icon,
             style,
         }
     }
+}
 
-    pub fn display(&self) -> Result<String, ()> {
-        let content = self.module.display()?;
-
-        if let Some(icon) = self.icon {
-            Ok(format!(
-                "{}{} {}{}",
-                self.style.display(),
-                icon,
-                content,
-                colors::Style::default().display()
-            ))
-        } else {
-            Ok(format!(
-                "{}{}{}",
-                self.style.display(),
-                content,
-                colors::Style::default().display()
-            ))
-        }
+impl<T: Content> fmt::Display for StyledModule<T> {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        write!(
+            f,
+            "{}{} {}{}",
+            self.style,
+            self.icon.unwrap_or(Icon::Empty),
+            self.content.show().unwrap_or_default(),
+            Style::default()
+        )
     }
 }

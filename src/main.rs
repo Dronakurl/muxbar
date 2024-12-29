@@ -14,10 +14,10 @@ fn main() {
         let styled_mod = Arc::new(styled_mod);
         let thread_styled_mod = Arc::clone(&styled_mod);
 
-        thread::spawn(move || thread_styled_mod.display().ok())
+        thread::spawn(move || format!("{}", thread_styled_mod))
     });
 
-    let strings: Vec<_> = handles.filter_map(|t| t.join().ok().flatten()).collect();
+    let strings: Vec<_> = handles.filter_map(|t| t.join().ok()).collect();
 
     println!(
         "{}{}{}",

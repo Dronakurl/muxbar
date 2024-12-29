@@ -4,7 +4,7 @@ use crate::modules::{styled::StyledModule, Module};
 use crate::utils::conditional_insert::conditional_insert;
 use crate::utils::system::battery::BatteryInformation;
 
-pub fn get_modules() -> Vec<StyledModule> {
+pub fn get_modules() -> Vec<StyledModule<Module>> {
     let battery_information = BatteryInformation::new();
     let battery_percentage = battery_information.map(|x| x.percentages);
     let is_charging = battery_information.map(|x| x.is_charging).unwrap_or(true);

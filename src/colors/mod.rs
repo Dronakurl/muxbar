@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 // Those are only constructed in config.rs
 #[allow(dead_code)]
 #[derive(Clone, Copy)]
@@ -21,22 +23,31 @@ pub struct Style {
     pub bold: bool,
 }
 
-impl Style {
-    pub fn default() -> Self {
-        Self {
-            fg: Color::Reset,
-            bg: Color::Reset,
-            bold: false,
-        }
-    }
-
-    pub fn display(self) -> String {
-        format!(
+impl Display for Style {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
             "{}{}{}",
             foreground_color(self.fg),
             background_color(self.bg),
             bold(self.bold),
         )
+    }
+}
+
+impl Display for Color {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", foreground_color(*self))
+    }
+}
+
+impl Default for Style {
+    fn default() -> Self {
+        Self {
+            fg: Color::Reset,
+            bg: Color::Reset,
+            bold: false,
+        }
     }
 }
 
