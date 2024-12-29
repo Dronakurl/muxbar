@@ -13,7 +13,7 @@ pub fn get_modules() -> Vec<StyledModule> {
 
     vec![
         Some(StyledModule::new(
-            Module::Time("%H:%M:%S"),
+            Module::Time("%Y-%m-%d %H:%M"),
             Some(Icon::Time),
             Style {
                 fg: Color::Magenta,
@@ -22,7 +22,7 @@ pub fn get_modules() -> Vec<StyledModule> {
             },
         )),
         Some(StyledModule::new(
-            Module::Cpu(2),
+            Module::Cpu(0),
             Some(Icon::Cpu),
             Style {
                 fg: Color::Cyan,
@@ -31,7 +31,7 @@ pub fn get_modules() -> Vec<StyledModule> {
             },
         )),
         Some(StyledModule::new(
-            Module::Memory(2),
+            Module::Memory(0),
             Some(Icon::DoubleServer),
             Style {
                 fg: Color::Yellow,
@@ -51,6 +51,15 @@ pub fn get_modules() -> Vec<StyledModule> {
         Some(StyledModule::new(
             Module::SessionName,
             Some(Icon::Tmux),
+            Style {
+                fg: Color::Blue,
+                bg: Color::Reset,
+                bold: false,
+            },
+        )),
+        Some(StyledModule::new(
+            Module::WindowName,
+            Some(Icon::SimpleTux),
             Style {
                 fg: Color::Blue,
                 bg: Color::Reset,
