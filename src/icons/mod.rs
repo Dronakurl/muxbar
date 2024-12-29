@@ -2,7 +2,6 @@ use crate::utils::system::battery::BatteryInformation;
 use std::fmt;
 
 // Those are only constructed in config.rs
-#[allow(dead_code)]
 #[derive(Clone, Copy)]
 pub enum Icon {
     Empty,
@@ -38,7 +37,7 @@ impl Icon {
 impl fmt::Display for Icon {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            Icon::Empty => write!(f, "{}", ""),
+            Icon::Empty => write!(f, ""),
             Icon::Manual(s) => write!(f, "{}", s),
             Icon::Time => write!(f, ""),
             Icon::Hyprland => write!(f, ""),

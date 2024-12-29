@@ -4,7 +4,7 @@ use std::fmt::Formatter;
 use crate::colors;
 use crate::colors::Style;
 use crate::icons::Icon;
-use crate::modules::content::Content;
+use crate::modules::Show;
 
 #[derive(Clone, Copy)]
 pub struct StyledModule<T> {
@@ -23,7 +23,7 @@ impl<T> StyledModule<T> {
     }
 }
 
-impl<T: Content> fmt::Display for StyledModule<T> {
+impl<T: Show> fmt::Display for StyledModule<T> {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         write!(
             f,
